@@ -12,31 +12,33 @@ public class Main {
     }
 
     public static void installSystem(int os, int yearProd) {
-        int currentYear = LocalDate.now().getYear();
-        if (os == 0 && yearProd == currentYear) {
-            System.out.println("Установите версию приложения для iOS по ссылке");
-        } else if (os == 0 && yearProd < currentYear) {
-            System.out.println("Установите облегченную версию приложения для iOS по ссылке");
-        } else if (os == 1 && yearProd == currentYear) {
-            System.out.println("Установите версию приложения для Android по ссылке");
-        } else if (os == 1 && yearProd < currentYear) {
-            System.out.println("Установите облегченную версию приложения для Android по ссылке");
+        if (yearProd <= 2015) {
+            if (os == 0) {
+                System.out.println("Установите облегченную версию приложения для iOS по ссылке");
+            } else {
+                System.out.println("Установите облегченную версию приложения для Android по ссылке");
+            }
+        } else {
+            if (os == 0) {
+                System.out.println("Установите версию приложения для iOS по ссылке");
+            } else {
+                System.out.println("Установите версию приложения для Android по ссылке");
+            }
         }
-
     }
 
-    public static void countDays(int deliveryDistance) {
-        if (deliveryDistance <= 100) {
-            if (deliveryDistance < 20) {
-                System.out.println("Доставка в пределах " + deliveryDistance + " км " + "занимает сутки.");
-            } else if (deliveryDistance >= 20 && deliveryDistance < 60) {
-                System.out.println("Доставка в пределах " + deliveryDistance + " км " + "занимает двое суток.");
-            } else if (deliveryDistance >= 60 && deliveryDistance <= 100) {
-                System.out.println("Доставка в пределах " + deliveryDistance + " км " + "занимает трое суток.");
-            }
-        } else if (deliveryDistance > 100) {
-            System.out.println("На такие расстояния доставка не ведется!");
+    public static String countDays(int deliveryDistance) {
+        String day = "";
+        if (deliveryDistance < 20) {
+            day = "1";
+        } else if (deliveryDistance >= 20 && deliveryDistance < 60) {
+            day = "2";
+        } else if (deliveryDistance >= 60 && deliveryDistance < 100) {
+            day = "3";
+        } else {
+            day = "Свыше 100 км доставки нет ";
         }
+        return day;
     }
 
 
@@ -55,6 +57,7 @@ public class Main {
         installSystem(1, 2023);
 
         System.out.println("Задание 3");
-        countDays(101);
+        int deliveryDistance = 101;
+        System.out.println("Потребуется дней: "+countDays(deliveryDistance));
     }
 }
